@@ -1,0 +1,154 @@
+/* ─────────────────────────────────────────────────────────────
+   Sidebar — 260 × 100vh  |  bg #112a4d
+   ───────────────────────────────────────────────────────────── */
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background-color: #112a4d;
+  flex-shrink: 0;
+}
+
+.sidebar__content {
+  width: 260px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── Top nav block (logo + items) ── */
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 59px;
+  padding-top: 32px;
+}
+
+/* ── Logo ── */
+.sidebar__header {
+  padding: 0 16px;
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 32px;
+}
+
+.sidebar__logo-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* ── Nav items wrapper ── */
+.sidebar__items {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Regular nav group (Dashboard / Profile / Settings) ── */
+.sidebar__group {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  gap: 4px;
+}
+
+/* ── Base nav item button ── */
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 228px;
+  height: 40px;
+  padding: 9px 12px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #f9fafb;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  transition: background-color 0.15s ease;
+}
+
+.sidebar__item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.sidebar__item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar__chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #f9fafb;
+}
+
+/* ── Horizontal divider ── */
+.sidebar__divider {
+  height: 1px;
+  background-color: #254674;
+  margin: 0 16px;
+  flex-shrink: 0;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Rewards Management — expandable section
+   Parent container: 260px wide, align-items: center
+   ────────────────────────────────────────────────────────────
+   Children widths:
+     • Header (full width, padding 0 16px) → inner item 228px
+     • Active wrapper 236px  → inner item 228px (with padding 0 4px)
+     • Transactions item 228px (centered = 16px from each side)
+   ──────────────────────────────────────────────────────────── */
+.sidebar__rewards-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 260px;
+}
+
+.sidebar__rewards-header {
+  width: 100%;
+  align-self: stretch;
+  padding: 0 16px;
+}
+
+.sidebar__rewards-header .sidebar__item {
+  width: 100%;   /* fills 228px inside the 16px+16px padding */
+}
+
+/* Active item wrapper — bg #1a365d, 236px, radius 8px */
+.sidebar__active-wrapper {
+  width: 236px;
+  background-color: #1a365d;
+  border-radius: 8px;
+  padding: 0 4px;
+}
+
+.sidebar__active-wrapper .sidebar__item {
+  width: 100%;   /* fills 228px inside 4px+4px padding */
+}
+
+/* Transactions item — 228px, centered by parent align-items:center */
+.sidebar__item--sub {
+  width: 228px;
+}
+
+/* ── Footer ── */
+.sidebar__footer {
+  height: 72px;
+  padding: 0 16px 32px;
+}

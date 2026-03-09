@@ -1,0 +1,138 @@
+/* ─────────────────────────────────────────────────────────────
+   Navbar — 64px tall  |  bg #ffffff  |  border-bottom #e4e7ec
+   ───────────────────────────────────────────────────────────── */
+.navbar {
+  height: 64px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e4e7ec;
+  padding: 14px 24px;
+  flex-shrink: 0;
+}
+
+.navbar__inner {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Breadcrumb ── */
+.navbar__breadcrumb {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__crumb-inactive {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #98a3b3;
+}
+
+.navbar__crumb-sep {
+  display: flex;
+  align-items: center;
+  margin: 0 6px;
+  color: #98a3b3;
+}
+
+.navbar__crumb-active {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #1e293b;
+}
+
+/* ── Right actions ── */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar__icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.navbar__icon-btn:hover {
+  background-color: #f1f5f9;
+}
+
+/* Bell with notification dot */
+.navbar__bell-wrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.navbar__bell-wrap .navbar__icon-btn {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+}
+
+.navbar__bell-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: #434343;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* User avatar + name */
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #c8d0db;
+  background-image: url('/images/avatar.png');
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  /* fallback initials color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.navbar__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar__username {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #212121;
+}

@@ -1,0 +1,64 @@
+/* ─────────────────────────────────────────────────────────────
+   MyOffers — page layout only (padding, grid, header)
+   Card, Dropdown, SearchInput and Pagination own their CSS.
+   ───────────────────────────────────────────────────────────── */
+.my-offers {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.my-offers__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.my-offers__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.5px;
+  color: #101a28;
+}
+
+.my-offers__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.my-offers__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .my-offers__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .my-offers__header {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: 12px;
+  }
+  .my-offers__controls {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 780px) {
+  .my-offers__grid {
+    grid-template-columns: 1fr;
+  }
+}
