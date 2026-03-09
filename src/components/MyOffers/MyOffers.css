@@ -38,6 +38,18 @@
   gap: 24px;
 }
 
+/* ── Empty state ── */
+.my-offers__empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #98a3b3;
+  padding: 48px 0;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1200px) {
   .my-offers__grid {

@@ -1,0 +1,41 @@
+/* ─────────────────────────────────────────────────────────────
+   NavItem — sidebar navigation button
+   Figma: 228 × 40px | padding 9 12 | radius 5 | Roboto 400 14px
+   Designed for dark sidebar backgrounds (color: #f9fafb)
+   ───────────────────────────────────────────────────────────── */
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding: 9px 12px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #f9fafb;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  transition: background-color 0.15s ease;
+  text-align: left;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav-item__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-item__trailing {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #f9fafb;
+}

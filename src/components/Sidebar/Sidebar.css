@@ -1,5 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
-   Sidebar — 260 × 100vh  |  bg #112a4d
+   Sidebar — layout & structural styles only.
+   NavItem button styles live in ui/NavItem/NavItem.css
    ───────────────────────────────────────────────────────────── */
 .sidebar {
   width: 260px;
@@ -60,41 +61,6 @@
   gap: 4px;
 }
 
-/* ── Base nav item button ── */
-.sidebar__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 228px;
-  height: 40px;
-  padding: 9px 12px;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #f9fafb;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 21px;
-  transition: background-color 0.15s ease;
-}
-
-.sidebar__item:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-}
-
-.sidebar__item-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.sidebar__chevron {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  color: #f9fafb;
-}
-
 /* ── Horizontal divider ── */
 .sidebar__divider {
   height: 1px;
@@ -105,12 +71,10 @@
 
 /* ────────────────────────────────────────────────────────────
    Rewards Management — expandable section
-   Parent container: 260px wide, align-items: center
-   ────────────────────────────────────────────────────────────
-   Children widths:
-     • Header (full width, padding 0 16px) → inner item 228px
-     • Active wrapper 236px  → inner item 228px (with padding 0 4px)
-     • Transactions item 228px (centered = 16px from each side)
+   Parent: 260px wide, align-items: center
+     • Header  (full width, padding 0 16px) → inner item 228px
+     • Active wrapper 236px → inner item 228px (padding 0 4px)
+     • Sub item 228px (centered = 16px each side)
    ──────────────────────────────────────────────────────────── */
 .sidebar__rewards-section {
   display: flex;
@@ -126,10 +90,6 @@
   padding: 0 16px;
 }
 
-.sidebar__rewards-header .sidebar__item {
-  width: 100%;   /* fills 228px inside the 16px+16px padding */
-}
-
 /* Active item wrapper — bg #1a365d, 236px, radius 8px */
 .sidebar__active-wrapper {
   width: 236px;
@@ -138,11 +98,7 @@
   padding: 0 4px;
 }
 
-.sidebar__active-wrapper .sidebar__item {
-  width: 100%;   /* fills 228px inside 4px+4px padding */
-}
-
-/* Transactions item — 228px, centered by parent align-items:center */
+/* Sub item (e.g. Transactions) — 228px, centered by parent */
 .sidebar__item--sub {
   width: 228px;
 }
@@ -151,4 +107,40 @@
 .sidebar__footer {
   height: 72px;
   padding: 0 16px 32px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Collapsible wrapper
+   Uses CSS grid-template-rows trick: 0fr ↔ 1fr
+   No JS height measurement needed, handles unknown content height.
+   ───────────────────────────────────────────────────────────── */
+.sidebar__collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease-out;
+}
+
+.sidebar__collapse--open {
+  grid-template-rows: 1fr;
+}
+
+/* Inner wrapper — min-height:0 is required for 0fr to work */
+.sidebar__collapse__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Rewards sub-items: same centering as before (active 236px, sub 228px) */
+.sidebar__rewards-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  width: 260px;
+}
+
+/* Rewards collapse must stretch full width inside sidebar__rewards-section */
+.sidebar__collapse--rewards {
+  align-self: stretch;
 }
