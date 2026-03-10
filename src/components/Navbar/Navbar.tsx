@@ -54,7 +54,7 @@ export default function Navbar() {
             <div className="navbar__user">
               <div className="navbar__avatar">
                 <img
-                  src="/public/images/avatar.jpg"
+                  src={`${import.meta.env.BASE_URL}images/avatar.jpg`}
                   alt="Dean M"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
                 />

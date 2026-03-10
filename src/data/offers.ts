@@ -1,5 +1,7 @@
 import type { Offer } from '../types'
 
+const base = import.meta.env.BASE_URL
+
 export const OFFERS: Offer[] = [
   {
     id: 1,
@@ -7,7 +9,7 @@ export const OFFERS: Offer[] = [
     category: 'Products',
     subcategory: 'Footwear',
     points: 75,
-    image: '/images/offer-1.png',
+    image: `${base}images/offer-1.png`,
     imageBgClass: 'offer-card__image-wrap--dark',
   },
   {
@@ -16,7 +18,7 @@ export const OFFERS: Offer[] = [
     category: 'Services',
     subcategory: 'Transport',
     points: 150,
-    image: '/images/offer-2.png',
+    image: `${base}images/offer-2.png`,
     imageBgClass: 'offer-card__image-wrap--light',
   },
   {
@@ -25,7 +27,7 @@ export const OFFERS: Offer[] = [
     category: 'Discounts',
     subcategory: 'Kitchenware',
     points: 125,
-    image: '/images/offer-3.png',
+    image: `${base}images/offer-3.png`,
     imageBgClass: 'offer-card__image-wrap--white',
   },
   {
@@ -34,7 +36,7 @@ export const OFFERS: Offer[] = [
     category: 'Discounts',
     subcategory: 'Kitchenware',
     points: 125,
-    image: '/images/offer-4.png',
+    image: `${base}images/offer-4.png`,
     imageBgClass: 'offer-card__image-wrap--white',
   },
   {
@@ -43,7 +45,7 @@ export const OFFERS: Offer[] = [
     category: 'Products',
     subcategory: 'Beauty',
     points: 150,
-    image: '/images/offer-5.png',
+    image: `${base}images/offer-5.png`,
     imageBgClass: 'offer-card__image-wrap--peach',
   },
   {
@@ -52,7 +54,7 @@ export const OFFERS: Offer[] = [
     category: 'Services',
     subcategory: 'Transport',
     points: 150,
-    image: '/images/offer-6.png',
+    image: `${base}images/offer-6.png`,
     imageBgClass: 'offer-card__image-wrap--light',
   },
 ]
