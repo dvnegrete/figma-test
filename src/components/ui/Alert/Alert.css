@@ -1,0 +1,121 @@
+/* ─────────────────────────────────────────────────────────────
+   Alert — modal overlay + dialog
+   Figma: w=361 r=12 bg=#fff stroke=#d5d7da padding=24 gap=16
+   ───────────────────────────────────────────────────────────── */
+
+/* Backdrop */
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: alert-fade-in 0.15s ease-out;
+}
+
+@keyframes alert-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Dialog panel */
+.alert {
+  position: relative;
+  width: 361px;
+  background-color: #ffffff;
+  border: 1px solid #d5d7da;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: alert-slide-up 0.18s ease-out;
+}
+
+@keyframes alert-slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* Close button — absolute top-right */
+.alert__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #667285;
+  border-radius: 4px;
+  transition: background-color 0.12s ease;
+}
+
+.alert__close:hover {
+  background-color: #f1f5f9;
+}
+
+/* ── Icon containers ── */
+.alert__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Success: two-ring effect — inner bg #d1fadf, outer ring #ecfdf3 */
+.alert__icon-wrap--success {
+  background-color: #d1fadf;
+  box-shadow: 0 0 0 8px #ecfdf3;
+}
+
+/* Error: plain red circle ring */
+.alert__icon-wrap--error {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px #fee4e2;
+}
+
+/* Dev: neutral blue — informational */
+.alert__icon-wrap--dev {
+  background-color: #e0f2fe;
+  box-shadow: 0 0 0 8px #f0f9ff;
+}
+
+/* ── Text block ── */
+.alert__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.alert__title {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  color: #101a28;
+  text-align: center;
+  margin: 0;
+}
+
+.alert__message {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #535862;
+  text-align: center;
+  margin: 0;
+}

@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import './Navbar.css'
-import { IconSearch, IconChevronRight } from '../ui'
+import { IconSearch, IconChevronRight, Alert } from '../ui'
+import type { AlertConfig } from '../ui'
+import { ALERTS } from '../../data/alerts'
 
 /* ─── Navbar-specific icon ───────────────────────────────────── */
 const IconBell = () => (
@@ -11,45 +14,66 @@ const IconBell = () => (
 )
 
 export default function Navbar() {
+  const [alert, setAlert] = useState<AlertConfig | null>(null)
+
   return (
-    <header className="navbar">
-      <div className="navbar__inner">
+    <>
+      <header className="navbar">
+        <div className="navbar__inner">
 
-        {/* Breadcrumb */}
-        <nav className="navbar__breadcrumb">
-          <span className="navbar__crumb-inactive">Application</span>
-          <span className="navbar__crumb-sep">
-            <IconChevronRight size={12} strokeWidth={1.5} />
-          </span>
-          <span className="navbar__crumb-active">My Offers</span>
-        </nav>
+          {/* Breadcrumb */}
+          <nav className="navbar__breadcrumb">
+            <span className="navbar__crumb-inactive">Application</span>
+            <span className="navbar__crumb-sep">
+              <IconChevronRight size={12} strokeWidth={1.5} />
+            </span>
+            <span className="navbar__crumb-active">My Offers</span>
+          </nav>
 
-        {/* Right actions */}
-        <div className="navbar__actions">
-          <button className="navbar__icon-btn" aria-label="Search">
-            <IconSearch size={20} color="#677385" />
-          </button>
-
-          <div className="navbar__bell-wrap">
-            <button className="navbar__icon-btn" aria-label="Notifications">
-              <IconBell />
+          {/* Right actions */}
+          <div className="navbar__actions">
+            <button
+              className="navbar__icon-btn"
+              aria-label="Search"
+              onClick={() => setAlert(ALERTS.dev)}
+            >
+              <IconSearch size={20} color="#677385" />
             </button>
-            <span className="navbar__bell-dot" />
-          </div>
 
-          <div className="navbar__user">
-            <div className="navbar__avatar">
-              <img
-                src="/images/avatar.png"
-                alt="Dean M"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-              />
+            <div className="navbar__bell-wrap">
+              <button
+                className="navbar__icon-btn"
+                aria-label="Notifications"
+                onClick={() => setAlert(ALERTS.dev)}
+              >
+                <IconBell />
+              </button>
+              <span className="navbar__bell-dot" />
             </div>
-            <span className="navbar__username">Dean M</span>
-          </div>
-        </div>
 
-      </div>
-    </header>
+            <div className="navbar__user">
+              <div className="navbar__avatar">
+                <img
+                  src="/public/images/avatar.jpg"
+                  alt="Dean M"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                />
+              </div>
+              <span className="navbar__username">Damián V.N.</span>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      {alert && (
+        <Alert
+          type={alert.type}
+          title={alert.title}
+          message={alert.message}
+          onClose={() => setAlert(null)}
+        />
+      )}
+    </>
   )
 }

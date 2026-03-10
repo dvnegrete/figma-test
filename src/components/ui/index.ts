@@ -1,3 +1,6 @@
+export { default as Alert } from './Alert/Alert'
+export type { AlertProps } from './Alert/Alert'
+export type { AlertType, AlertConfig } from '../../types'
 export { default as Dropdown } from './Dropdown/Dropdown'
 export { default as SearchInput } from './SearchInput/SearchInput'
 export { default as Pagination } from './Pagination/Pagination'

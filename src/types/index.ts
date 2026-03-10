@@ -7,3 +7,11 @@ export interface Offer {
   image: string
   imageBgClass: string
 }
+
+export type AlertType = 'success' | 'error' | 'dev'
+
+export interface AlertConfig {
+  type: AlertType
+  title: string
+  message: string
+}
