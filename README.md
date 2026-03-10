@@ -1,73 +1,158 @@
-# React + TypeScript + Vite
+# Accindi — Figma to React (Pixel Perfect)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A proof of concept demonstrating the complete workflow of transforming a Figma design into a functional React interface, faithfully reproducing the spacing, typography, color, and component values defined in the original file.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Goal
 
-## React Compiler
+Demonstrate the ability to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Extract** exact values from a Figma file via the official API (colors, padding, gap, border-radius, typography, images)
+2. **Translate** those values into React components + plain CSS without external UI libraries
+3. **Architect** the code following Clean Architecture principles and separation of concerns
+4. **Achieve** a pixel-perfect result compared to the original design
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Design Reference
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| | |
+|---|---|
+| **File** | Accindi — Figma Designs Marketplace |
+| **Tool** | Figma (imported `.fig` file) |
+| **Screen implemented** | My Offers — grid view with filters |
+| **Reference resolution** | 1440 × 1024 px |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Product images and style values (colors, spacing, typography, radii) were taken directly from the Figma design file.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| React | 19 | UI framework |
+| TypeScript | 5.9 | Static typing |
+| Vite | 7 | Bundler and dev server |
+| Plain CSS | — | Styles (no Tailwind or CSS-in-JS) |
+
+No external component libraries. The entire UI system was built from scratch based on the design.
+
+---
+
+## Project Structure
+
+```
+src/
+├── types/
+│   └── index.ts              # Domain entities: Offer, AlertType, AlertConfig
+│
+├── data/
+│   ├── offers.ts             # Mock data for the 6 offers (extracted from the design)
+│   └── alerts.ts             # Configuration for the 4 reusable alert types
+│
+├── components/
+│   │
+│   ├── ui/                   # Generic components — no business logic
+│   │   ├── Alert/            # Modal with success / error / dev variants
+│   │   ├── Dropdown/         # Filter with multi-select checkbox panel
+│   │   ├── NavItem/          # Navigation button for dark sidebars
+│   │   ├── Pagination/       # Pagination with dynamic page calculation
+│   │   ├── SearchInput/      # Search field with integrated icon
+│   │   ├── icons.tsx         # SVG icon library (Tabler Icons style)
+│   │   └── index.ts          # Barrel export
+│   │
+│   ├── OfferCard/            # Product card — consumes Offer + ui/
+│   ├── Sidebar/              # Navigation sidebar — collapsible by group
+│   ├── Navbar/               # Top bar — breadcrumb + action buttons
+│   └── MyOffers/             # Main page — orchestrates grid + filters
+│
+├── App.tsx                   # Root layout: Sidebar + Navbar + MyOffers
+├── App.css                   # Application shell styles
+└── index.css                 # Global reset + font imports
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Implemented Features
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### My Offers — Grid
+- 3-column grid with 6 offer cards
+- Real product images exported from the Figma file via API
+- Points badge required per offer
+
+### Filters
+- **"All Categories" Dropdown** — floating panel with multi-select checkboxes (All / Products / Services / Discounts), filters in real time by `offer.category`
+- **Search** — searches by `offer.title` (case-insensitive, partial match)
+- Both filters work as AND; changing either one resets to page 1
+- Empty state shown when no offers match
+
+### Pagination
+- Dynamic pagination calculated over filtered results
+- Items-per-page selector (8 / 16 / 24)
+- Automatically hidden when there is only one page
+
+### Sidebar
+- **Dashboard** group — collapsible (shows/hides Profile)
+- **Rewards Management** group — collapsible (shows/hides Offers + Transactions)
+- Pure CSS animation using `grid-template-rows: 0fr ↔ 1fr`
+- Active "Offers" item highlighted with background `#1a365d`
+
+### Alerts
+- **Purchase successful** — green check icon (clicking the cart button on an offer)
+- **Purchase unsuccessful** — red error icon (clicking the info button on an offer)
+- **Dev** — blue info icon (unimplemented buttons: Search, Bell, nav items)
+- Rendered via `createPortal` onto `document.body`
+- Dismissed with the ✕ button or by clicking the backdrop
+
+### Responsive
+- `> 1200px` — 3 columns (faithful to the Figma design)
+- `780px – 1200px` — 2 columns
+- `< 780px` — 1 column
+
+---
+
+## Implementation Process
+
 ```
+Figma design file
+    ↓  inspect design values
+Colors, padding, gap, radius, fonts, images
+    ↓  translate into CSS and components
+React + plain CSS
+    ↓  compare against design
+Pixel-perfect result
+```
+
+---
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Development server
+npm run dev
+
+# Production build
+npm run build
+
+# Preview the build
+npm run preview
+```
+
+---
+
+## Architecture Decisions
+
+| Decision | Reason |
+|---|---|
+| Plain CSS, no frameworks | Maximum control over pixel-perfect output; no third-party style overrides |
+| `ui/` separated from feature components | Generic components have no domain knowledge; reusable across any screen |
+| Types in `src/types/` | Single source of truth; `AlertType`, `AlertConfig`, `Offer` available globally |
+| Data in `src/data/` | Decouples static configuration from UI state; `ALERTS` reusable in any component |
+| `createPortal` for modals | Escapes any `z-index` or `overflow:hidden` in the component tree |
+| `grid-template-rows: 0fr ↔ 1fr` | Collapse animation without measuring height in JavaScript |
+| Design values sourced from Figma | All spacing, colors, and typography taken directly from the design file |
